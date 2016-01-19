@@ -143,18 +143,6 @@ class PersonController extends Controller
         return $this->redirectToRoute('person_index');
     }
 
-
-            // 'query_builder' => function (EntityRepository $er) {
-            //     return $er->createQueryBuilder('p')
-            //     ->innerJoin('p.affiliateId', 'a')
-            //     ->innerJoin('a.companyId', 'c')
-            //     ->where('a.companyId = :companyId')
-            //     ->andWhere('c.accountantId IS NULL OR c.accountantId IS NOT NULL AND p.id != c.accountantId')
-            //     ->setParameter('companyId', $this->companyId)
-            //     ->orderBy('p.name', 'ASC');
-            // }
-
-
     /**
      * Creates a form to delete a Person entity.
      *
