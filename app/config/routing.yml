@@ -1,4 +1,0 @@
-business:
-    resource: "@BusinessBundle/Controller/"
-    type:     annotation
-    prefix:   /

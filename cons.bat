@@ -1,1 +1,0 @@
-"D:\OpenServer\modules\php\PHP-5.5\php.exe" "D:\_Projects\Symphony\BusinessTT1\bin\console" %1 %2 %3 %4 %5 %6 %7
