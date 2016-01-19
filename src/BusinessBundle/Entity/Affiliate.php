@@ -16,7 +16,7 @@ class Affiliate
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @ORM\Column(name="name", type="string", length=127, nullable=false)
@@ -32,7 +32,7 @@ class Affiliate
      * @ORM\ManyToOne(targetEntity="Company")
      * @ORM\JoinColumn(name="id_company", referencedColumnName="id")
      */
-    private $companyId;
+    private $company;
 
     /**
      * Get id
@@ -93,26 +93,26 @@ class Affiliate
     }
 
     /**
-     * Set companyId
+     * Set company
      *
-     * @param \BusinessBundle\Entity\Company $companyId
+     * @param \BusinessBundle\Entity\Company $company
      *
      * @return Affiliate
      */
-    public function setCompanyId(\BusinessBundle\Entity\Company $companyId = null)
+    public function setCompany(\BusinessBundle\Entity\Company $company = null)
     {
-        $this->companyId = $companyId;
+        $this->company = $company;
 
         return $this;
     }
 
     /**
-     * Get companyId
+     * Get company
      *
      * @return \BusinessBundle\Entity\Company
      */
-    public function getCompanyId()
+    public function getCompany()
     {
-        return $this->companyId;
+        return $this->company;
     }
 }

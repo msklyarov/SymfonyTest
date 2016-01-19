@@ -28,7 +28,7 @@ class AffiliateController extends Controller
 
         $affiliates = $em->getRepository('BusinessBundle:Affiliate')->findAll();
 
-        return $this->render('affiliate/index.html.twig', array(
+        return $this->render('BusinessBundle:affiliate:index.html.twig', array(
             'affiliates' => $affiliates,
         ));
     }
@@ -53,7 +53,7 @@ class AffiliateController extends Controller
             return $this->redirectToRoute('affiliate_show', array('id' => $affiliate->getId()));
         }
 
-        return $this->render('affiliate/new.html.twig', array(
+        return $this->render('BusinessBundle:affiliate:new.html.twig', array(
             'affiliate' => $affiliate,
             'form' => $form->createView(),
         ));
@@ -67,11 +67,8 @@ class AffiliateController extends Controller
      */
     public function showAction(Affiliate $affiliate)
     {
-        $deleteForm = $this->createDeleteForm($affiliate);
-
-        return $this->render('affiliate/show.html.twig', array(
+        return $this->render('BusinessBundle:affiliate:show.html.twig', array(
             'affiliate' => $affiliate,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -94,7 +91,7 @@ class AffiliateController extends Controller
             return $this->redirectToRoute('affiliate_edit', array('id' => $affiliate->getId()));
         }
 
-        return $this->render('affiliate/edit.html.twig', array(
+        return $this->render('BusinessBundle:affiliate:edit.html.twig', array(
             'affiliate' => $affiliate,
             'edit_form' => $editForm->createView(),
         ));

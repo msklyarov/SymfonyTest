@@ -28,7 +28,7 @@ class PersonController extends Controller
 
         $persons = $em->getRepository('BusinessBundle:Person')->findAll();
 
-        return $this->render('person/index.html.twig', array(
+        return $this->render('BusinessBundle:person:index.html.twig', array(
             'persons' => $persons,
         ));
     }
@@ -53,7 +53,7 @@ class PersonController extends Controller
             return $this->redirectToRoute('person_show', array('id' => $person->getId()));
         }
 
-        return $this->render('person/new.html.twig', array(
+        return $this->render('BusinessBundle:person:new.html.twig', array(
             'person' => $person,
             'form' => $form->createView(),
         ));
@@ -69,7 +69,7 @@ class PersonController extends Controller
     {
         $deleteForm = $this->createDeleteForm($person);
 
-        return $this->render('person/show.html.twig', array(
+        return $this->render('BusinessBundle:person:show.html.twig', array(
             'person' => $person,
             'delete_form' => $deleteForm->createView(),
         ));
@@ -95,7 +95,7 @@ class PersonController extends Controller
             return $this->redirectToRoute('person_edit', array('id' => $person->getId()));
         }
 
-        return $this->render('person/edit.html.twig', array(
+        return $this->render('BusinessBundle:person:edit.html.twig', array(
             'person' => $person,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),

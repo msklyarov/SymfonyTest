@@ -19,14 +19,14 @@
                     <td><a href="{{ path('employee_show', { 'id': company.id }) }}">{{ company.id }}</a></td>
                     <td>{{ company.name }}</td>
                     <td>
-                        {% if company.directorId is not null %}
-                            {{ company.directorId.name }}
+                        {% if company.director is not null %}
+                            {{ company.director.name }}
                         {% endif %}
                         <a href="{{ path('employee_editDirector', { 'id': company.id }) }}">edit</a>
                     </td>
                     <td>
-                        {% if company.accountantId is not null %}
-                            {{ company.accountantId.name }}
+                        {% if company.accountant is not null %}
+                            {{ company.accountant.name }}
                         {% endif %}
                         <a href="{{ path('employee_editAccountant', { 'id': company.id }) }}">edit</a>
                     </td>

@@ -28,16 +28,16 @@ class EmployeeAccountantType extends AbstractType
 
         $this->companyId = $builder->getData()->getId();
 
-        $builder->add('accountantId', EntityType::class, [
+        $builder->add('accountant', EntityType::class, [
             'class' => 'BusinessBundle:Person',
             'choice_label' => 'name',
             'label' => 'Person',
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('p')
-                ->innerJoin('p.affiliateId', 'a')
-                ->innerJoin('a.companyId', 'c')
-                ->where('a.companyId = :companyId')
-                ->andWhere('c.directorId IS NULL OR c.directorId IS NOT NULL AND p.id != c.directorId')
+                ->innerJoin('p.affiliate', 'a')
+                ->innerJoin('a.company', 'c')
+                ->where('a.company = :companyId')
+                ->andWhere('c.director IS NULL OR c.director IS NOT NULL AND p.id != c.director')
                 ->setParameter('companyId', $this->companyId)
                 ->orderBy('p.name', 'ASC');
             }

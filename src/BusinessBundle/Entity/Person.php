@@ -16,7 +16,7 @@ class Person
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    protected $id;
+    private $id;
 
     /**
      * @ORM\Column(name="name", type="string", length=127, nullable=false)
@@ -27,7 +27,7 @@ class Person
      * @ORM\ManyToOne(targetEntity="Affiliate")
      * @ORM\JoinColumn(name="id_affiliate", referencedColumnName="id", nullable=true)
      */
-    private $affiliateId;
+    private $affiliate;
 
     /**
      * Get id
@@ -64,26 +64,26 @@ class Person
     }
 
     /**
-     * Set affiliateId
+     * Set affiliate
      *
-     * @param \BusinessBundle\Entity\Affiliate $affiliateId
+     * @param \BusinessBundle\Entity\Affiliate $affiliate
      *
      * @return Person
      */
-    public function setAffiliateId(\BusinessBundle\Entity\Affiliate $affiliateId = null)
+    public function setAffiliate(\BusinessBundle\Entity\Affiliate $affiliate = null)
     {
-        $this->affiliateId = $affiliateId;
+        $this->affiliate = $affiliate;
 
         return $this;
     }
 
     /**
-     * Get affiliateId
+     * Get affiliate
      *
      * @return \BusinessBundle\Entity\Affiliate
      */
-    public function getAffiliateId()
+    public function getAffiliate()
     {
-        return $this->affiliateId;
+        return $this->affiliate;
     }
 }

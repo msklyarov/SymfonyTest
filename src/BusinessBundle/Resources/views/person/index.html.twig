@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    <h1>Affiliate list</h1>
+    <h1>Person list</h1>
 
     <div class="panel panel-default">
         <table class="table">
@@ -9,25 +9,27 @@
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
-                    <th>City</th>
-                    <th>Company</th>
+                    <th>Affiliate</th>
                     <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
-            {% for affiliate in affiliates %}
+            {% for person in persons %}
                 <tr>
-                    <td><a href="{{ path('affiliate_show', { 'id': affiliate.id }) }}">{{ affiliate.id }}</a></td>
-                    <td>{{ affiliate.name }}</td>
-                    <td>{{ affiliate.city }}</td>
-                    <td>{{ affiliate.companyId.name }}</td>
+                    <td><a href="{{ path('person_show', { 'id': person.id }) }}">{{ person.id }}</a></td>
+                    <td>{{ person.name }}</td>
+                    <td>
+                        {% if person.affiliate is not null %}
+                            {{ person.affiliate.name }}
+                        {% endif %}
+                    </td>
                     <td>
                         <ul>
                             <li>
-                                <a href="{{ path('affiliate_show', { 'id': affiliate.id }) }}">show</a>
+                                <a href="{{ path('person_show', { 'id': person.id }) }}">show</a>
                             </li>
                             <li>
-                                <a href="{{ path('affiliate_edit', { 'id': affiliate.id }) }}">edit</a>
+                                <a href="{{ path('person_edit', { 'id': person.id }) }}">edit</a>
                             </li>
                         </ul>
                     </td>
@@ -39,7 +41,7 @@
 
     <ul>
         <li>
-            <a href="{{ path('affiliate_new') }}">Create a new entry</a>
+            <a href="{{ path('person_new') }}">Create a new entry</a>
         </li>
     </ul>
 {% endblock %}

@@ -31,7 +31,7 @@ class EmployeeController extends Controller
 
         $companies = $em->getRepository('BusinessBundle:Company')->findAll();
 
-        return $this->render('employee/index.html.twig', array(
+        return $this->render('BusinessBundle:employee:index.html.twig', array(
             'companies' => $companies,
         ));
     }
@@ -56,7 +56,7 @@ class EmployeeController extends Controller
             return $this->redirectToRoute('employee_index');
         }
 
-        return $this->render('employee/editDirector.html.twig', [
+        return $this->render('BusinessBundle:employee:editDirector.html.twig', [
             'company' => $company,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -83,7 +83,7 @@ class EmployeeController extends Controller
             return $this->redirectToRoute('employee_index');
         }
 
-        return $this->render('employee/editAccountant.html.twig', [
+        return $this->render('BusinessBundle:employee:editAccountant.html.twig', [
             'company' => $company,
             'edit_form' => $editForm->createView(),
             'delete_form' => $deleteForm->createView(),
@@ -109,7 +109,7 @@ class EmployeeController extends Controller
                 ->findBy(['id' => $company->getId()]);
 
             foreach ($companies as $company) {
-                $company->setDirectorId(null);
+                $company->setDirector(null);
             }
 
             $em->flush();
@@ -136,7 +136,7 @@ class EmployeeController extends Controller
                 ->findBy(['id' => $company->getId()]);
 
             foreach ($companies as $company) {
-                $company->setAccountantId(null);
+                $company->setAccountant(null);
             }
 
             $em->flush();
@@ -166,7 +166,7 @@ class EmployeeController extends Controller
             return $this->redirectToRoute('employee_show', array('id' => $employee->getId()));
         }
 
-        return $this->render('employee/new.html.twig', array(
+        return $this->render('BusinessBundle:employee:new.html.twig', array(
             'employee' => $employee,
             'form' => $form->createView(),
         ));
@@ -182,7 +182,7 @@ class EmployeeController extends Controller
     {
         $deleteForm = $this->createDeleteForm($employee);
 
-        return $this->render('employee/show.html.twig', array(
+        return $this->render('BusinessBundle:employee:show.html.twig', array(
             'employee' => $employee,
             'delete_form' => $deleteForm->createView(),
         ));

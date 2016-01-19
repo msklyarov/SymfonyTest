@@ -28,7 +28,7 @@ class CompanyController extends Controller
 
         $companies = $em->getRepository('BusinessBundle:Company')->findAll();
 
-        return $this->render('company/index.html.twig', array(
+        return $this->render('BusinessBundle:company:index.html.twig', array(
             'companies' => $companies,
         ));
     }
@@ -53,7 +53,7 @@ class CompanyController extends Controller
             return $this->redirectToRoute('company_show', array('id' => $company->getId()));
         }
 
-        return $this->render('company/new.html.twig', array(
+        return $this->render('BusinessBundle:company:new.html.twig', array(
             'company' => $company,
             'form' => $form->createView(),
         ));
@@ -67,11 +67,8 @@ class CompanyController extends Controller
      */
     public function showAction(Company $company)
     {
-        $deleteForm = $this->createDeleteForm($company);
-
-        return $this->render('company/show.html.twig', array(
+        return $this->render('BusinessBundle:company:show.html.twig', array(
             'company' => $company,
-            'delete_form' => $deleteForm->createView(),
         ));
     }
 
@@ -94,7 +91,7 @@ class CompanyController extends Controller
             return $this->redirectToRoute('company_edit', array('id' => $company->getId()));
         }
 
-        return $this->render('company/edit.html.twig', array(
+        return $this->render('BusinessBundle:company:edit.html.twig', array(
             'company' => $company,
             'edit_form' => $editForm->createView(),
         ));

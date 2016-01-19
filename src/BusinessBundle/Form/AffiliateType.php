@@ -20,7 +20,7 @@ class AffiliateType extends AbstractType
             ->add('city')
         ;
 
-        $builder->add('companyId', EntityType::class, array(
+        $builder->add('company', EntityType::class, array(
             'class' => 'BusinessBundle:Company',
             'choice_label' => 'name',
             'label' => 'Company'

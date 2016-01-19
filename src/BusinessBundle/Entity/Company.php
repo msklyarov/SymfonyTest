@@ -27,13 +27,13 @@ class Company
      * @ORM\ManyToOne(targetEntity="Person")
      * @ORM\JoinColumn(name="id_director", referencedColumnName="id", nullable=true)
      */
-    private $directorId;
+    private $director;
 
     /**
      * @ORM\ManyToOne(targetEntity="Person")
      * @ORM\JoinColumn(name="id_accountant", referencedColumnName="id", nullable=true)
      */
-    private $accountantId;
+    private $accountant;
 
     /**
      * Get id
@@ -70,50 +70,50 @@ class Company
     }
 
     /**
-     * Set directorId
+     * Set director
      *
-     * @param \BusinessBundle\Entity\Person $directorId
+     * @param \BusinessBundle\Entity\Person $director
      *
      * @return Company
      */
-    public function setDirectorId(\BusinessBundle\Entity\Person $directorId = null)
+    public function setDirector(\BusinessBundle\Entity\Person $director = null)
     {
-        $this->directorId = $directorId;
+        $this->director = $director;
 
         return $this;
     }
 
     /**
-     * Get directorId
+     * Get director
      *
      * @return \BusinessBundle\Entity\Person
      */
-    public function getDirectorId()
+    public function getDirector()
     {
-        return $this->directorId;
+        return $this->director;
     }
 
     /**
-     * Set accountantId
+     * Set accountant
      *
-     * @param \BusinessBundle\Entity\Person $accountantId
+     * @param \BusinessBundle\Entity\Person $accountant
      *
      * @return Company
      */
-    public function setAccountantId(\BusinessBundle\Entity\Person $accountantId = null)
+    public function setAccountant(\BusinessBundle\Entity\Person $accountant = null)
     {
-        $this->accountantId = $accountantId;
+        $this->accountant = $accountant;
 
         return $this;
     }
 
     /**
-     * Get accountantId
+     * Get accountant
      *
      * @return \BusinessBundle\Entity\Person
      */
-    public function getAccountantId()
+    public function getAccountant()
     {
-        return $this->accountantId;
+        return $this->accountant;
     }
 }

@@ -19,7 +19,7 @@ class PersonType extends AbstractType
             ->add('name')
         ;
 
-        $builder->add('affiliateId', EntityType::class, array(
+        $builder->add('affiliate', EntityType::class, array(
             'class' => 'BusinessBundle:Affiliate',
             'choice_label' => 'name',
             'label' => 'Affiliate'

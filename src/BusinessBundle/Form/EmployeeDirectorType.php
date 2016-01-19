@@ -16,13 +16,6 @@ use BusinessBundle\Entity\Company;
 
 class EmployeeDirectorType extends AbstractType
 {
-    // private $company;
-
-    // public function __construct(Company $company)
-    // {
-    //     // $this->$company = $company;
-    // }
-
     /**
      * @param FormBuilderInterface $builder
      * @param array $options
@@ -37,16 +30,16 @@ class EmployeeDirectorType extends AbstractType
 
         $this->companyId = $builder->getData()->getId();
 
-        $builder->add('directorId', EntityType::class, [
+        $builder->add('director', EntityType::class, [
             'class' => 'BusinessBundle:Person',
             'choice_label' => 'name',
             'label' => 'Person',
             'query_builder' => function (EntityRepository $er) {
                 return $er->createQueryBuilder('p')
-                ->innerJoin('p.affiliateId', 'a')
-                ->innerJoin('a.companyId', 'c')
-                ->where('a.companyId = :companyId')
-                ->andWhere('c.accountantId IS NULL OR c.accountantId IS NOT NULL AND p.id != c.accountantId')
+                ->innerJoin('p.affiliate', 'a')
+                ->innerJoin('a.company', 'c')
+                ->where('a.company = :companyId')
+                ->andWhere('c.accountant IS NULL OR c.accountant IS NOT NULL AND p.id != c.accountant')
                 ->setParameter('companyId', $this->companyId)
                 ->orderBy('p.name', 'ASC');
             }
