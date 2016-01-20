@@ -43,8 +43,7 @@ class Company
     public function validate(ExecutionContextInterface $context)
     {
         if ($this->getDirector() !== null && $this->getAccountant() !== null &&
-            $this->getDirector()->getId() === $this->getAccountant()->getId())
-        {
+            $this->getDirector()->getId() === $this->getAccountant()->getId()) {
             $context
                 ->buildViolation('You cannot set same person for director and chief accountant position.')
                 ->addViolation();

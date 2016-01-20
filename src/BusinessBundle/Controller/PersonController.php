@@ -116,25 +116,11 @@ class PersonController extends Controller
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
-            $directors = $em->getRepository('BusinessBundle:Company')
-                ->findBy(['directorId' => $person->getId()]);
-
-            foreach ($directors as $director) {
-                $director->setDirectorId(null);
-            }
-
-            $accountants = $em->getRepository('BusinessBundle:Company')
-                ->findBy(['accountantId' => $person->getId()]);
-
-            foreach ($accountants as $accountant) {
-                $accountant->setAccountantId(null);
-            }
-
             $persons = $em->getRepository('BusinessBundle:Person')
                 ->findBy(['id' => $person->getId()]);
 
             foreach ($persons as $person) {
-                $person->setAffiliateId(null);
+                $person->setAffiliate(null);
             }
 
             $em->flush();
