@@ -11,6 +11,7 @@
                     <th>Company</th>
                     <th>Director</th>
                     <th>Chief Accountant</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -22,13 +23,14 @@
                         {% if company.director is not null %}
                             {{ company.director.name }}
                         {% endif %}
-                        <a href="{{ path('employee_editDirector', { 'id': company.id }) }}">edit</a>
                     </td>
                     <td>
                         {% if company.accountant is not null %}
                             {{ company.accountant.name }}
                         {% endif %}
-                        <a href="{{ path('employee_editAccountant', { 'id': company.id }) }}">edit</a>
+                    </td>
+                    <td>
+                        <a href="{{ path('employee_edit', { 'id': company.id }) }}">edit</a>
                     </td>
                 </tr>
             {% endfor %}

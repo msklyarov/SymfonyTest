@@ -37,15 +37,16 @@ class EmployeeController extends Controller
     }
 
     /**
-     * Edits company director position
+     * Edits company employees positions
      *
-     * @Route("/{id}/editDirector", name="employee_editDirector")
+     * @Route("/{id}/edit", name="employee_edit")
      * @Method({"GET", "POST"})
      */
-    public function editDirectorAction(Request $request, Company $company)
+    public function editAction(Request $request, Company $company)
     {
-        $deleteForm = $this->createDeleteDirectorForm($company);
-        $editForm = $this->createForm('BusinessBundle\Form\EmployeeDirectorType', $company);
+        $deleteDirectorForm = $this->createDeleteDirectorForm($company);
+        $deleteAccountantForm = $this->createDeleteAccountantForm($company);
+        $editForm = $this->createForm('BusinessBundle\Form\EmployeeType', $company);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
@@ -56,40 +57,13 @@ class EmployeeController extends Controller
             return $this->redirectToRoute('employee_index');
         }
 
-        return $this->render('BusinessBundle:employee:editDirector.html.twig', [
+        return $this->render('BusinessBundle:employee:edit.html.twig', [
             'company' => $company,
             'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
+            'delete_director_form' => $deleteDirectorForm->createView(),
+            'delete_accountant_form' => $deleteAccountantForm->createView(),
         ]);
     }
-
-    /**
-     * Edits company accountant position
-     *
-     * @Route("/{id}/editAccountant", name="employee_editAccountant")
-     * @Method({"GET", "POST"})
-     */
-    public function editAccountantAction(Request $request, Company $company)
-    {
-        $deleteForm = $this->createDeleteAccountantForm($company);
-        $editForm = $this->createForm('BusinessBundle\Form\EmployeeAccountantType', $company);
-        $editForm->handleRequest($request);
-
-        if ($editForm->isSubmitted() && $editForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($company);
-            $em->flush();
-
-            return $this->redirectToRoute('employee_index');
-        }
-
-        return $this->render('BusinessBundle:employee:editAccountant.html.twig', [
-            'company' => $company,
-            'edit_form' => $editForm->createView(),
-            'delete_form' => $deleteForm->createView(),
-        ]);
-    }
-
 
     /**
      * Deletes the director position.

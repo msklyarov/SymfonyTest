@@ -4,6 +4,8 @@ namespace BusinessBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 /**
  * @ORM\Entity(repositoryClass="BusinessRepository")
@@ -34,6 +36,20 @@ class Company
      * @ORM\JoinColumn(name="id_accountant", referencedColumnName="id", nullable=true)
      */
     private $accountant;
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context)
+    {
+        if ($this->getDirector() !== null && $this->getAccountant() !== null &&
+            $this->getDirector()->getId() === $this->getAccountant()->getId())
+        {
+            $context
+                ->buildViolation('You cannot set same person for director and chief accountant position.')
+                ->addViolation();
+        }
+    }
 
     /**
      * Get id
