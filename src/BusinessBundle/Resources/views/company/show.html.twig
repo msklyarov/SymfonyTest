@@ -13,6 +13,22 @@
                 <th>Name</th>
                 <td>{{ company.name }}</td>
             </tr>
+            <tr>
+                <th>Director</th>
+                <td>
+                    {% if company.director is not null %}
+                        {{ company.director.name }}
+                    {% endif %}
+                </td>
+            </tr>
+            <tr>
+                <th>Chief Accountant</th>
+                <td>
+                    {% if company.accountant is not null %}
+                        {{ company.accountant.name }}
+                    {% endif %}
+                </td>
+            </tr>
         </tbody>
     </table>
 

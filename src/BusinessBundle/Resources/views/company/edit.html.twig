@@ -13,5 +13,19 @@
         <li>
             <a href="{{ path('company_index') }}">Back to the list</a>
         </li>
+        {% if company.director is not null %}
+            <li>
+                {{ form_start(delete_director_form) }}
+                    <input type="submit" value="Free director position">
+                {{ form_end(delete_director_form) }}
+            </li>
+        {% endif %}
+        {% if company.accountant is not null %}
+            <li>
+                {{ form_start(delete_accountant_form) }}
+                    <input type="submit" value="Free chief accountant position">
+                {{ form_end(delete_accountant_form) }}
+            </li>
+        {% endif %}
     </ul>
 {% endblock %}

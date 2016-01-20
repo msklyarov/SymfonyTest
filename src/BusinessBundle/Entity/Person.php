@@ -34,13 +34,14 @@ class Person
     /**
      * @ORM\PreUpdate
      */
-    public function onSetAffiliateToNull(LifecycleEventArgs $event)
+    public function onChangeAffiliate(LifecycleEventArgs $event)
     {
         if ($event->hasChangedField('affiliate')) {
             $oldAffiliate = $event->getOldValue('affiliate');
             $newAffiliate = $event->getNewValue('affiliate');
 
-            if ($oldAffiliate !== null && $newAffiliate === null) { 
+            if ($oldAffiliate !== null &&
+                ($newAffiliate === null || $newAffiliate->getId() !== $oldAffiliate->getId())) {
 
                 if ($oldAffiliate->getCompany() !== null) {
                     if ($oldAffiliate->getCompany()->getDirector() !== null &&
