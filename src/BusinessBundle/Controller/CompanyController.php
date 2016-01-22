@@ -42,7 +42,7 @@ class CompanyController extends Controller
     public function newAction(Request $request)
     {
         $company = new Company();
-        $form = $this->createForm('BusinessBundle\Form\CompanyType', $company);
+        $form = $this->createForm('BusinessBundle\Form\CompanyType', $company, ['allow_extra_fields' => false]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -82,7 +82,7 @@ class CompanyController extends Controller
     {
         $deleteDirectorForm = $this->createDeleteDirectorForm($company);
         $deleteAccountantForm = $this->createDeleteAccountantForm($company);
-        $editForm = $this->createForm('BusinessBundle\Form\CompanyType', $company);
+        $editForm = $this->createForm('BusinessBundle\Form\CompanyType', $company, ['allow_extra_fields' => true]);
         $editForm->handleRequest($request);
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {

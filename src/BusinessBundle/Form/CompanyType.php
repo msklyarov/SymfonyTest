@@ -23,35 +23,37 @@ class CompanyType extends AbstractType
 
         $this->companyId = $builder->getData()->getId();
 
-        $builder->add('director', EntityType::class, [
-            'class' => 'BusinessBundle:Person',
-            'choice_label' => 'name',
-            'label' => 'Director',
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('p')
-                ->innerJoin('p.affiliate', 'a')
-                ->innerJoin('a.company', 'c')
-                ->where('a.company = :companyId')
-                ->andWhere('c.accountant IS NULL OR c.accountant IS NOT NULL AND p.id != c.accountant')
-                ->setParameter('companyId', $this->companyId)
-                ->orderBy('p.name', 'ASC');
-            }
-        ]);
+        if (isset($options['allow_extra_fields']) && $options['allow_extra_fields']) {
+            $builder->add('director', EntityType::class, [
+                'class' => 'BusinessBundle:Person',
+                'choice_label' => 'name',
+                'label' => 'Director',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('p')
+                    ->innerJoin('p.affiliate', 'a')
+                    ->innerJoin('a.company', 'c')
+                    ->where('a.company = :companyId')
+                    ->andWhere('c.accountant IS NULL OR c.accountant IS NOT NULL AND p.id != c.accountant')
+                    ->setParameter('companyId', $this->companyId)
+                    ->orderBy('p.name', 'ASC');
+                }
+            ]);
 
-        $builder->add('accountant', EntityType::class, [
-            'class' => 'BusinessBundle:Person',
-            'choice_label' => 'name',
-            'label' => 'Chief Accountant',
-            'query_builder' => function (EntityRepository $er) {
-                return $er->createQueryBuilder('p')
-                ->innerJoin('p.affiliate', 'a')
-                ->innerJoin('a.company', 'c')
-                ->where('a.company = :companyId')
-                ->andWhere('c.director IS NULL OR c.director IS NOT NULL AND p.id != c.director')
-                ->setParameter('companyId', $this->companyId)
-                ->orderBy('p.name', 'ASC');
-            }
-        ]);
+            $builder->add('accountant', EntityType::class, [
+                'class' => 'BusinessBundle:Person',
+                'choice_label' => 'name',
+                'label' => 'Chief Accountant',
+                'query_builder' => function (EntityRepository $er) {
+                    return $er->createQueryBuilder('p')
+                    ->innerJoin('p.affiliate', 'a')
+                    ->innerJoin('a.company', 'c')
+                    ->where('a.company = :companyId')
+                    ->andWhere('c.director IS NULL OR c.director IS NOT NULL AND p.id != c.director')
+                    ->setParameter('companyId', $this->companyId)
+                    ->orderBy('p.name', 'ASC');
+                }
+            ]);
+        }
     }
     
     /**
